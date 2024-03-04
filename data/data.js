@@ -1,23 +1,27 @@
 export const users = [
     {
+      name: "Sonja",
       email: "sonja@test.com",
       password: "12345",
       suerId: 123456789,
     },
     {
+      name: "Oleksii",
       email: "oleksii@test.com",
       password: "12345",
       suerId: 123456788,
     },
     {
+      name: "Falk",
       email: "falk@test.com",
       password: "12345",
       suerId: 123456787,
     },
     {
-        email: "test",
-        password: "12345",
-        suerId: 123456785,
+      name: "Test Name",
+      email: "test",
+      password: "12345",
+      suerId: 123456785,
     },
   ];
   
@@ -48,7 +52,7 @@ export const users = [
       subtitle: "",
       author: "Arthur Conan Doyle", // Reference to authors table
       year: "1887",
-      isbn: "9781420925531",
+      isbn: "9781420925532",
     },
     {
       title: "Sherlock Holmes",
@@ -126,7 +130,7 @@ export const users = [
       subtitle: "",
       author: "Peter Mayle",
       year: "2009",
-      isbn: "978-0-345-80456-3",
+      isbn: "978-0-345-80456-2",
     },
     {
       title: "The Marseille Caper",
@@ -167,5 +171,5 @@ export const users = [
   
   export let user_books = {
     suerId: 123456789,
-    books: [booksId],
+    books: [],
   };

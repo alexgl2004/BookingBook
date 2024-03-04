@@ -1,7 +1,7 @@
 import { ScrollView, View, Text, Pressable } from "react-native";
 import { Link } from "expo-router";
 import { globalStyles } from "../../../styles/global";
-import { movies } from "../../../data/movies";
+import { books } from "../../../data/data";
 import { Image } from "expo-image";
 import { AutoHeightImage } from "../../../components/AutoHeightImage";
 import { StyledButton } from "../../../components/StyledButton";
@@ -25,11 +25,11 @@ export default function MoviePage() {
         <View style={{ paddingBottom: 32 }}>
           {header_var}
           <View style={{ gap: 12 }}>
-            {movies.map((movie) => {
+            {books.map((book) => {
               return (
                 <Link
-                  key={movie.id}
-                  href={`movies/${movie.id}`}
+                  key={book.isbn}
+                  href={`movies/${book.isbn}`}
                   style={[globalStyles.link]}
                   asChild
                 >
@@ -41,13 +41,8 @@ export default function MoviePage() {
                       maxWidth: "100%",
                     }}
                   >
-                    <AutoHeightImage
-                      source={movie.thumbnail}
-                      style={{ width: 120 }}
-                      contentFit="contain"
-                    />
                     <Text style={[globalStyles.h2, { flex: 1 }]}>
-                      {movie.title}
+                      {book.title}
                     </Text>
                   </Pressable>
                 </Link>

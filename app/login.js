@@ -5,6 +5,7 @@ import {
   Button,
   KeyboardAvoidingView,
 } from "react-native";
+
 import { globalStyles } from "../styles/global";
 import { COLORS } from "../styles/constants";
 import { useState, useContext } from "react";
@@ -26,16 +27,20 @@ export default function Login() {
       ]}
     >
       {user?
-         (<>
-         <Button
-            onPress={() => {
-              logout();
-              //console.log('aaa')
-              router.push('');
-            }}
-            color={COLORS.accent}
-            title="Logout"
-          /></>):
+         (
+          <>
+            <Button
+              onPress={() => {
+                logout();
+                //console.log('aaa')
+                alert('You are logout now')
+                router.push('');
+              }}
+              color={COLORS.accent}
+              title="Logout"
+            /
+            ></>
+         ):
          (<>
           <Text style={globalStyles.h1}>Login</Text>
           <TextInput
@@ -57,11 +62,14 @@ export default function Login() {
           />
           <Button
             onPress={() => {
-              login(name, password);
-              if (showBackButton) {
+
+              if(login(name, password)==null){
+                alert('Wrong Email or Password!')
+              }else{
+//                alert('Congradulation')
                 router.push('');
+              }              
                 //router.back();
-              }
             }}
             color={COLORS.accent}
             title="Submit"

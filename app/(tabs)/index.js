@@ -22,6 +22,7 @@ export default function HomePage() {
       </ScrollView>
     )
   }else{
+    console.log("user", user);
     return (
       <ScrollView style={globalStyles.container}>
         {header_var}

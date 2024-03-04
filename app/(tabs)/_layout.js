@@ -55,9 +55,9 @@ export default function MainTabs() {
         }}
       />
       <Tabs.Screen
-        name="actors"
+        name="order"
         options={{
-          title: "By author",
+          title: "Order",
           headerShown: false,
           tabBarIcon: ({ color }) => {
             return <MaterialCommunityIcons name="account-check-outline" size={24} color={color} />;
@@ -67,3 +67,15 @@ export default function MainTabs() {
     </Tabs>
   );
 }
+/*
+      <Tabs.Screen
+        name="actors"
+        options={{
+          title: "By author",
+          headerShown: false,
+          tabBarIcon: ({ color }) => {
+            return <MaterialCommunityIcons name="account-check-outline" size={24} color={color} />;
+          },
+        }}
+      />      
+*/

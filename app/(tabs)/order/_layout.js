@@ -4,7 +4,7 @@ import { View, Button } from "react-native";
 import { router } from "expo-router";
 import { LoginButtonTop } from "../../../components/LoginButtonTop";
 
-export default function MoviesStack() {
+export default function OrderStack() {
   return (
       <Stack
         screenOptions={{
@@ -24,8 +24,7 @@ export default function MoviesStack() {
           },
         }}
       >
-        <Stack.Screen name="index" options={{ title: "Movies" }} />
-        <Stack.Screen name="[id]" options={{ title: "Details" }} />
+        <Stack.Screen name="index" options={{ title: "Order" }} />
       </Stack>
   );
 }
