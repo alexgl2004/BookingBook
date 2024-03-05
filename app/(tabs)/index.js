@@ -11,7 +11,7 @@ import { UserContext } from "../../context/UserContext";
 export default function HomePage() {
 
   const { user } = useContext(UserContext);
-  console.log("user", user);
+ // console.log("user", user);
   const header_var = (<Typography variant="heading">Book Order</Typography>);
 
   if(user==null){
