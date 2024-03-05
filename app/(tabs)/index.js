@@ -22,7 +22,7 @@ export default function HomePage() {
       </ScrollView>
     )
   }else{
-    console.log("user", user);
+//    console.log("user", user);
     return (
       <ScrollView style={globalStyles.container}>
         {header_var}
@@ -37,10 +37,12 @@ export default function HomePage() {
             <Link asChild style={globalStyles.link} href="movies">
                 <Button color={COLORS.accent} title="SELECT Book" />
             </Link>
-            <Link asChild style={globalStyles.link} href="actors">
-                <Button color={COLORS.accent} title="Select Author" />
-            </Link>
       </ScrollView>
     );
   }
 }
+/*
+            <Link asChild style={globalStyles.link} href="actors">
+                <Button color={COLORS.accent} title="Select Author" />
+            </Link>
+*/            

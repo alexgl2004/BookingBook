@@ -6,11 +6,14 @@ import { Image } from "expo-image";
 import { AutoHeightImage } from "../../../components/AutoHeightImage";
 import { StyledButton } from "../../../components/StyledButton";
 import { useContext } from "react";
-import { UserContext } from "../../../context/UserContext";
 import { LoginText } from "../../../components/LoginText";
+import { UserContext } from "../../../context/UserContext";
+import { OrderContext } from "../../../context/OrderContext";
+
 
 export default function MoviePage() {
   const { user } = useContext(UserContext);
+  const { order } = useContext(OrderContext);
   const header_var = (<Text style={globalStyles.h1}>Select a book</Text>)
   if(user==null){
     return (
@@ -30,7 +33,7 @@ export default function MoviePage() {
                 <Link
                   key={book.isbn}
                   href={`movies/${book.isbn}`}
-                  style={[globalStyles.link]}
+                  style={order && order.books.includes(book.isbn)?[globalStyles.linkOrdered]:[globalStyles.link]}
                   asChild
                 >
                   <Pressable
@@ -41,7 +44,7 @@ export default function MoviePage() {
                       maxWidth: "100%",
                     }}
                   >
-                    <Text style={[globalStyles.h2, { flex: 1 }]}>
+                    <Text style={order && order.books.includes(book.isbn)?[globalStyles.link]:[globalStyles.linkOrdered]}>
                       {book.title}
                     </Text>
                   </Pressable>

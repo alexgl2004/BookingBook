@@ -9,7 +9,7 @@ export function OrderProvider({ children }) {
   const [order, setOrder] = useState(null);
 
   function addToOrder(userId, isbn) {
-    console.log('2',order)
+//    console.log('2',order)
     if(order==null){
       setOrder({
         suerId: userId,
@@ -38,8 +38,9 @@ export function OrderProvider({ children }) {
         suerId: userId,
         books: order.books.filter(
           (book) => {
+//            console.log(book,isbn)
             if(book!=isbn){
-              return null;
+              return 1;
             }
           }
         ),

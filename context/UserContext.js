@@ -6,7 +6,7 @@ export const UserContext = createContext();
 export function UserProvider({ children }) {
   // user: null if not logged in
   // { name: string, lastLogin: Date }
-  const [user, setUser] = useState({'email':'test','password':'12345','name':'test','userid':'123456785'});
+  const [user, setUser] = useState(null);//useState({'email':'test','password':'12345','name':'test','userid':'123456785'});
   function login(name, password) {
 
     let user_temp = users.filter(

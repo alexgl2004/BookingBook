@@ -1,5 +1,6 @@
-import { View, Button, Text } from "react-native";
+import { View, Pressable, Text } from "react-native";
 import { router } from "expo-router";
+import { globalStyles } from "../styles/global";
 import { Typography } from "./Typography";
 import { COLORS } from "../styles/constants";
 
@@ -9,13 +10,14 @@ export function LoginText() {
               You must login before ordering book
             </Typography>
             <View style={{ paddingRight: 12 }}>
-              <Button
+              <Pressable
                 onPress={() => {
                   router.push("login");
                 }}
                 color={COLORS.accent}
-                title="Login"
-              />
+              >
+                <Text style={globalStyles.button25}>Login</Text>
+              </Pressable>              
             </View>
           </>
  
