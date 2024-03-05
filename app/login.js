@@ -62,13 +62,15 @@ export default function Login() {
           />
           <Button
             onPress={() => {
-
+              login(name, password)
+/*              
               if(login(name, password)==null){
                 alert('Wrong Email or Password!')
               }else{
 //                alert('Congradulation')
                 router.push('');
               }              
+*/              
                 //router.back();
             }}
             color={COLORS.accent}

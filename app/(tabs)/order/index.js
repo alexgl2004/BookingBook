@@ -47,7 +47,7 @@ export default function ActorsPage() {
             }).map((book) => {
               return (
                 <>
-                  <View style={globalStyles.viewFlex}>
+                  <View key={book.isbn} style={globalStyles.viewFlex}>
                     <Link style={globalStyles.linkOrdered80}
                       key={book.isbn}
                       href={`movies/${book.isbn}`}

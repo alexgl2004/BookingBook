@@ -1,40 +1,50 @@
-import { createContext, useState } from "react";
-import { users } from "../data/data";
+import { createContext, useState, useRef } from "react";
+//import { users } from "../data/data";
+import { router } from "expo-router";
 
 export const UserContext = createContext();
 
 export function UserProvider({ children }) {
+  
   // user: null if not logged in
   // { name: string, lastLogin: Date }
   const [user, setUser] = useState(null);//useState({'email':'test','password':'12345','name':'test','userid':'123456785'});
+  const responseData = useRef(null)
   function login(name, password) {
 
-    let user_temp = users.filter(
-      (person) => {
-        if(person.email==name && person.password==password){
-          return {name: person.email, userid: person.suerId};
-        }else{
-          return null;
-        }
-      }
-    )
-    //console.log(user_temp)
-    if(user_temp.length<=0){
-      user_temp = null;
-    }else{
-      setUser(
-        {
-          name: user_temp[0].name,
-          email: user_temp[0].email,
-          userid: user_temp[0].suerId,
-        }
-      );
+  const options = {
+    method: 'POST',
+/*        
+    headers: {
+      'X-RapidAPI-Key': 'cee3bd1e22msheedb98e87dec740p196316jsn6d22f5917037',
+      'X-RapidAPI-Host': 'quotes-by-api-ninjas.p.rapidapi.com'
     }
+*/        
+  };
 
+//      console.log('https://prj-backend-mini-library.onrender.com/user/'+name)
+  
+//      try {
     
-
-    return user_temp;
-
+    const response = fetch('https://prj-backend-mini-library.onrender.com/user/' + name, options)
+    .then(response => response.json())
+    .then(data => { 
+      console.log(data)
+      console.log(data.name,name,'&&',data.password,password)
+      if( (data.name==name || data.email==name) && data.password == password){
+        setUser(
+          {
+            name: data.name,
+            email: data.email,
+            userid: data.id,
+          }
+        );
+        router.push('');        
+      }else{
+        alert('Wrong Email or Password!')
+      }
+    })
+    .catch(error => console.error(error));
   }
 
   function logout() {
