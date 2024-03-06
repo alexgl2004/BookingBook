@@ -10,12 +10,18 @@ export const globalStyles = StyleSheet.create({
   },
   p: {
     fontSize: 18,
-    color: COLORS.light,
+    color: "#ddd",
+    marginBottom: 8,
+    fontFamily: FONTS.sansSerif,
+  },
+  p2: {
+    fontSize: 16,
+    color: COLORS.grey,
     marginBottom: 8,
     fontFamily: FONTS.sansSerif,
   },
   h1: {
-    fontSize: 42,
+    fontSize: 26,
     color: COLORS.accent,
     marginBottom: 12,
     fontFamily: FONTS.sansSerifBold,
@@ -73,7 +79,7 @@ export const globalStyles = StyleSheet.create({
     color: COLORS.grey,
     fontFamily: FONTS.sansSerif,
     borderBottomWidth: 2,
-    borderBottomColor: COLORS.grey,
+    borderBottomColor: "#444",
     paddingBottom:10,
   },
   input: {
@@ -84,4 +90,46 @@ export const globalStyles = StyleSheet.create({
     fontFamily: FONTS.sansSerif,
     fontSize: 18,
   },
+  buttonNotOrder: {
+    height:50, 
+    width:'50%',
+    alignSelf:"center",
+    backgroundColor: "#F17A41",
+    color: COLORS.dark,
+    padding: 0,
+    paddingTop: 14,
+    borderRadius: 6,
+    fontFamily: FONTS.sansSerif,
+    fontSize: 18,
+    marginTop: 20
+  },
+  buttonOrdered: {
+    height:50, 
+    width:'50%',
+    alignSelf:"center",
+    backgroundColor: "transparent",
+    color: COLORS.dark,
+    padding: 0,
+    paddingTop: 14,
+    borderRadius: 6,
+    borderWidth:2,
+    borderColor:"#F17A41",
+    fontFamily: FONTS.sansSerif,
+    fontSize: 18,
+    marginTop: 20
+  }, 
+  buttonOrderText:{
+    alignSelf:"center",
+    fontSize: 18,
+  },
+  buttonNotOrderText:{
+    alignSelf:"center",
+    color: '#333',
+    fontSize: 18,
+  },
+  buttonOrderedText:{
+    alignSelf:"center",
+    color: "#F17A41",
+    fontSize: 18,
+  }
 });

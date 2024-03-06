@@ -35,7 +35,15 @@ export default function HomePage() {
               Make your choise
             </Typography>
             <Link asChild style={globalStyles.link} href="movies">
-                <Button color={COLORS.accent} title="SELECT Book" />
+                
+                <Pressable style={globalStyles.buttonNotOrder} 
+                  onPress={() => {
+                      router.push('movies')
+      //              console.log(order)
+                  }}
+                >
+                  <Text style={globalStyles.buttonNotOrderText}>SELECT Book</Text>
+              </Pressable>
             </Link>
       </ScrollView>
     );

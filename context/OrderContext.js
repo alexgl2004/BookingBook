@@ -11,12 +11,16 @@ export function OrderProvider({ children }) {
   function setOrderGET(userId, orderGET) {
 //    console.log('++++++',orderGET)
     let temp_array=[];
-    orderGET.forEach((elem) => {
-      if(temp_array.indexOf(elem)==-1)
-        temp_array.push(elem)
-    })
+
+    if(orderGET){
+      orderGET.forEach((elem) => {
+        if(temp_array.indexOf(elem)==-1)
+          temp_array.push(elem)
+      })
+    }
 
     setOrder({
+      updated: true,
       suerId: userId,
       books: temp_array/*orderGET.map((elem) => {
         return elem.book
@@ -24,27 +28,19 @@ export function OrderProvider({ children }) {
     });
   }
 
+  function changeOrderState(stateUpdate) {
+    //console.log(stateUpdate)
+    setOrder({
+      updated: stateUpdate,
+      suerId: order.suerId,
+      books: order.books
+    });
+
+  }
+
   function addToOrder(userId, id) {
     console.log(userId,id)
-    if(order==null){
-      setOrder({
-        suerId: userId,
-        books: [
-          id
-        ],
-      });
-
-    }else{
-      if(order.books.indexOf(id)==-1){
-        setOrder({
-          suerId: userId,
-          books: [
-            ... order.books,
-            id
-          ],
-        });
-      }
-    }
+    
     fetch('https://prj-backend-mini-library.onrender.com/users/'+userId+'/rent', {
       method: 'POST',
       headers: {
@@ -54,25 +50,40 @@ export function OrderProvider({ children }) {
       body: JSON.stringify({'bookId':id})
     })
     .then(response => response.json())
-    .then(data => { 
+    .then(data => {
+
       console.log(data)
+      if(order==null){
+
+        setOrder({
+          updated: true,
+          suerId: userId,
+          books: [
+            id
+          ],
+        });
+  
+      }else{
+
+        if(order.books.indexOf(id)==-1){
+          setOrder({
+            updated: true,
+            suerId: userId,
+            books: [
+              ... order.books,
+              id
+            ],
+          });
+        }
+      }
+
     })
   }
 
   function deleteFromOrder(userId, id) {
     if(order==null){
     }else{
-      setOrder({
-        suerId: userId,
-        books: order.books.filter(
-          (book) => {
-//            console.log(book,isbn)
-            if(book!=id){
-              return 1;
-            }
-          }
-        ),
-      });
+
       fetch('https://prj-backend-mini-library.onrender.com/users/'+userId+'/delete', {
         method: 'POST',
         headers: {
@@ -84,6 +95,18 @@ export function OrderProvider({ children }) {
       .then(response => response.json())
       .then(data => { 
         console.log(data)
+        setOrder({
+          updated: true,
+          suerId: userId,
+          books: order.books.filter(
+            (book) => {
+  //            console.log(book,isbn)
+              if(book!=id){
+                return 1;
+              }
+            }
+          ),
+        });        
       })
     }
   }
@@ -95,6 +118,7 @@ export function OrderProvider({ children }) {
         addToOrder,
         deleteFromOrder,
         setOrderGET,
+        changeOrderState,
       }}
     >
       {children}

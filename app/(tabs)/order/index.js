@@ -77,7 +77,6 @@ if(books==null){
                 <>
                   <View key={book._id} style={globalStyles.viewFlex}>
                     <Link style={globalStyles.linkOrdered80}
-                      key={book.id}
                       href={`movies/${book._id}`}
                       asChild
                     >

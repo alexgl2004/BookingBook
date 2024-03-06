@@ -28,7 +28,7 @@ if(book==null){
   const response = fetch('https://prj-backend-mini-library.onrender.com/book/'+id, options)
   .then(response => response.json())
   .then(data => { 
-    console.log(data)
+    console.log(1,data)
     setBook(data);
   })
   .catch(error => console.error(error));
@@ -36,8 +36,7 @@ if(book==null){
 //console.log(books)
   //console.log(books);
   const header_var = (<View>{book?(<>
-    <Text style={globalStyles.h1}>{book.title}</Text>
-    <Text style={globalStyles.h2}>{book.subtitle}</Text></>):(<></>)}
+    <Text style={globalStyles.h1}>{book.title}</Text></>):(<></>)}
   </View>)
 
   if(user==null){
@@ -60,21 +59,53 @@ if(book==null){
         <View style={{ paddingBottom: 32 }}>
           {header_var}
           <Text style={globalStyles.p}>{book.subtitle}</Text>
-          <Text style={globalStyles.p}>Author: {book.author}</Text>
-          <Text style={globalStyles.p}>Year: {book.year}</Text>
-          <Text style={globalStyles.p}>ISBN: {book.isbn}</Text>
-          <Button
+          <View style={{
+            borderTopWidth: 2,
+            borderTopColor: "#444",
+            marginBottom:15,
+            paddingTop:20
+          }}>
+            
+            <Text style={globalStyles.p2}>Author: {book.author}</Text>
+            <Text style={globalStyles.p2}>Year: {book.year}</Text>
+            <Text style={globalStyles.p2}>ISBN: {book.isbn}</Text>
+          </View>
+          <View style={{
+            borderTopWidth: 2,
+            borderTopColor: "#444",
+            marginBottom:15,
+            paddingTop:5,
+            alignSelf: "right",
+          }}>
+          <Text style={{
+            
+            color: '#ccc',
+            width: '100%',
+
+          }}>In store: {book.stock}</Text>
+          </View>
+          <Pressable style={isInOrder?globalStyles.buttonOrdered:globalStyles.buttonNotOrder}
             onPress={() => {
               if(!isInOrder){
-                addToOrder(user.userid, book.id)
+                if(book.stock>=1){
+                  book.stock -=1
+                  setBook(book);
+                  addToOrder(user.userid, book.id)
+                }else{
+                  alert('No Book in Store')
+                }
               }else{
+                book.stock +=1
+                setBook(book);
                 deleteFromOrder(user.userid, book.id)
               }
 //              console.log(order)
             }}
             color={COLORS.accent}
-            title={isInOrder?"Remove from Order":"Add to Order"}
-          />
+            
+          >
+            <Text style={isInOrder?globalStyles.buttonOrderedText:globalStyles.buttonNotOrderText}>{isInOrder?"Remove from Order":"Add to Order"}</Text>
+          </Pressable>
         </View>
       </ScrollView>
     );

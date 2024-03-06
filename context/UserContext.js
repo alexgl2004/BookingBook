@@ -21,7 +21,7 @@ export function UserProvider({ children }) {
   const response = fetch('https://prj-backend-mini-library.onrender.com/user/' + name, options)
     .then(response => response.json())
     .then(data => { 
-     console.log(data)
+      console.log('test',data)
 //     console.log(data.name,name,'&&',data.password,password)
       if( data.name && (data.name.toUpperCase()==name.toUpperCase() || data.email.toUpperCase()==name) && data.password == password){
         setUser(

@@ -15,7 +15,7 @@ export default function MoviePage() {
 
   const [books, setBooks] = useState(null);
   const { user } = useContext(UserContext);
-  const { order } = useContext(OrderContext);
+  const { order, changeOrderState } = useContext(OrderContext);
   const header_var = (<Text style={globalStyles.h1}>Select a book</Text>)
   if(user==null){
     return (
@@ -25,9 +25,10 @@ export default function MoviePage() {
       </ScrollView>
     )
   }else{
-    if(books==null){
+    if(books==null || order.updated){
+
       const options = {
-        method: 'GET',     
+        method: 'GET',
       }; 
       const response = fetch('https://prj-backend-mini-library.onrender.com/books/', options)
       .then(response => response.json())
@@ -35,6 +36,7 @@ export default function MoviePage() {
         //console.log(data)
   //      console.log(data.name,name,'&&',data.password,password)
         setBooks(data);
+        changeOrderState(false);
         //router.push('movies');
       })
       .catch(error => console.error(error));
@@ -57,14 +59,38 @@ export default function MoviePage() {
                 >
                   <Pressable
                     style={{
-                      flexDirection: "row",
-                      alignItems: "center",
+                      alignItems: "left",
                       gap: 12,
                       maxWidth: "100%",
+                      borderBottomWidth: 2,
+                      borderColor: "#444"
                     }}
                   >
                     <Text style={order && order.books.includes(book._id)?[globalStyles.link]:[globalStyles.linkOrdered]}>
                       {book.title}
+                    </Text>
+                    <Text style={{
+                        color: "#777",
+                        paddingBottom: 3,
+                      }}>
+                        <Text>
+                          ISBN: <Text style={{
+                            color: "#aaa",
+                            paddingBottom: 3,
+                          }}>{book.isbn}</Text>
+                        </Text>
+                        <Text>
+                          &nbsp;&nbsp;&nbsp;Year: <Text style={{
+                            color: "#aaa",
+                            paddingBottom: 3,
+                          }}>{book.year}</Text>
+                        </Text>
+                        <Text>
+                          &nbsp;&nbsp;&nbsp;In stock: <Text style={{
+                            color: "#aaa",
+                            paddingBottom: 3,
+                          }}>{book.stock}</Text>
+                        </Text>
                     </Text>
                   </Pressable>
                 </Link>
