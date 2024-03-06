@@ -4,7 +4,7 @@ import { globalStyles } from "../../../styles/global";
 import { AutoHeightImage } from "../../../components/AutoHeightImage";
 import { COLORS, FONTS } from "../../../styles/constants";
 import { LoginText } from "../../../components/LoginText";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { UserContext } from "../../../context/UserContext";
 import { OrderContext } from "../../../context/OrderContext";
 
@@ -24,21 +24,22 @@ export default function ActorsPage() {
     )
   }else{
 
-    if(books==null){
+    if(books==null || order.updated){
 
-      fetch('https://prj-backend-mini-library.onrender.com/books/', {
-        method: 'GET',
-      })
-      .then(response => response.json())
-      .then(data => { 
-        //console.log(data)
-  //      console.log(data.name,name,'&&',data.password,password)
-        setBooks(data);
-        //router.push('movies');
-      })
-      .catch(error => console.error(error));
-    }else{
-      //console.log(444)
+      useEffect(() => {
+        const fetchData = async () => {
+          const options = {
+            method: 'GET',
+          }; 
+          const response = await fetch('https://prj-backend-mini-library.onrender.com/books/', options);
+          const jsonData = await response.json();
+          setBooks(jsonData);
+//          changeOrderState(false);
+        }
+        fetchData();
+      }, [order]);
+
+
     }
 //    console.log(1,order)
 //    console.log(books)

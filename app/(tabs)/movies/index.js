@@ -5,7 +5,7 @@ import { globalStyles } from "../../../styles/global";
 import { Image } from "expo-image";
 import { AutoHeightImage } from "../../../components/AutoHeightImage";
 import { StyledButton } from "../../../components/StyledButton";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { LoginText } from "../../../components/LoginText";
 import { UserContext } from "../../../context/UserContext";
 import { OrderContext } from "../../../context/OrderContext";
@@ -25,22 +25,24 @@ export default function MoviePage() {
       </ScrollView>
     )
   }else{
+    
     if(books==null || order.updated){
 
-      const options = {
-        method: 'GET',
-      }; 
-      const response = fetch('https://prj-backend-mini-library.onrender.com/books/', options)
-      .then(response => response.json())
-      .then(data => { 
-        //console.log(data)
-  //      console.log(data.name,name,'&&',data.password,password)
-        setBooks(data);
-        changeOrderState(false);
-        //router.push('movies');
-      })
-      .catch(error => console.error(error));
-    } 
+      useEffect(() => {
+        const fetchData = async () => {
+          const options = {
+            method: 'GET',
+          }; 
+          const response = await fetch('https://prj-backend-mini-library.onrender.com/books/', options);
+          const jsonData = await response.json();
+          setBooks(jsonData);
+//          changeOrderState(false);
+        }
+        fetchData();
+      }, [order]);
+
+    }
+
     //console.log(books)
     //console.log(1)
 

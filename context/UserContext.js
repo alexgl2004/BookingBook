@@ -8,7 +8,7 @@ export const UserContext = createContext();
 
 export function UserProvider({ children }) {
   
-  const { setOrderGET } = useContext(OrderContext);
+  const { setOrderGET, clearOrder } = useContext(OrderContext);
   // user: null if not logged in
   // { name: string, lastLogin: Date }
   const [user, setUser] = useState(null);//useState({'email':'test','password':'12345','name':'test','userid':'123456785'});
@@ -44,6 +44,7 @@ export function UserProvider({ children }) {
 
   function logout() {
     setUser(null);
+    clearOrder(true);
   }
   return (
     <UserContext.Provider

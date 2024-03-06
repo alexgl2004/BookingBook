@@ -8,6 +8,20 @@ export function OrderProvider({ children }) {
   // { name: string, lastLogin: Date }
   const [order, setOrder] = useState(null);
 
+  function clearOrder(all=false) {
+    
+    if(all){
+      setOrder(null)  
+    }else{
+      setOrder({
+        updated: true,
+        suerId: order.suerId,
+        books: [],
+      });
+    }
+
+  }
+
   function setOrderGET(userId, orderGET) {
 //    console.log('++++++',orderGET)
     let temp_array=[];
@@ -119,6 +133,7 @@ export function OrderProvider({ children }) {
         deleteFromOrder,
         setOrderGET,
         changeOrderState,
+        clearOrder
       }}
     >
       {children}
