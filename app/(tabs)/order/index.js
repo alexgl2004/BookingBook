@@ -12,7 +12,7 @@ export default function ActorsPage() {
 
   const [books, setBooks] = useState(null);
   const { user } = useContext(UserContext);
-  const { deleteFromOrder, order } = useContext(OrderContext);
+  const { deleteFromOrder, order, changeOrderState } = useContext(OrderContext);
   const header_var = (<Text style={globalStyles.h1}>Order list</Text>)
   if(user==null){
 
@@ -24,9 +24,9 @@ export default function ActorsPage() {
     )
   }else{
 
-    if(books==null || order.updated){
+    if(books==null || (order!=null && order.updated)){
 
-      useEffect(() => {
+//      useEffect(() => {
         const fetchData = async () => {
           const options = {
             method: 'GET',
@@ -34,10 +34,10 @@ export default function ActorsPage() {
           const response = await fetch('https://prj-backend-mini-library.onrender.com/books/', options);
           const jsonData = await response.json();
           setBooks(jsonData);
-//          changeOrderState(false);
+          changeOrderState(false);
         }
         fetchData();
-      }, [order]);
+//      }, [order]);
 
 
     }

@@ -26,9 +26,9 @@ export default function MoviePage() {
     )
   }else{
     
-    if(books==null || order.updated){
+    if(books==null || (order!=null && order.updated)){
 
-      useEffect(() => {
+//      useEffect(() => {
         const fetchData = async () => {
           const options = {
             method: 'GET',
@@ -36,10 +36,10 @@ export default function MoviePage() {
           const response = await fetch('https://prj-backend-mini-library.onrender.com/books/', options);
           const jsonData = await response.json();
           setBooks(jsonData);
-//          changeOrderState(false);
+          changeOrderState(false);
         }
         fetchData();
-      }, [order]);
+//      }, [order]);
 
     }
 
