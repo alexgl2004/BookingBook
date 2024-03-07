@@ -14,6 +14,20 @@ export default function ActorsPage() {
   const { user } = useContext(UserContext);
   const { deleteFromOrder, order, changeOrderState } = useContext(OrderContext);
   const header_var = (<Text style={globalStyles.h1}>Order list</Text>)
+
+      useEffect(() => {
+  const fetchData = async () => {
+    const options = {
+      method: 'GET',
+    }; 
+    const response = await fetch('https://prj-backend-mini-library.onrender.com/books/', options);
+    const jsonData = await response.json();
+    setBooks(jsonData);
+//    changeOrderState(false);
+  }
+  fetchData();
+      }, [order]);
+
   if(user==null){
 
     return (
@@ -26,22 +40,11 @@ export default function ActorsPage() {
 
     if(books==null || (order!=null && order.updated)){
 
-//      useEffect(() => {
-        const fetchData = async () => {
-          const options = {
-            method: 'GET',
-          }; 
-          const response = await fetch('https://prj-backend-mini-library.onrender.com/books/', options);
-          const jsonData = await response.json();
-          setBooks(jsonData);
-          changeOrderState(false);
-        }
-        fetchData();
-//      }, [order]);
+
 
 
     }
-//    console.log(1,order)
+   console.log(1,order)
 //    console.log(books)
 /*
     console.log(books.filter(
@@ -53,32 +56,31 @@ export default function ActorsPage() {
       })
     )
 */    
-if(books==null){
-  <ScrollView style={globalStyles.container}>
-    <Text></Text>
-  </ScrollView>
-}else{
+  if(books==null){
+    <ScrollView style={globalStyles.container}>
+      <Text></Text>
+    </ScrollView>
+  }else{
 
-//    console.log(1,books)
-//    console.log(2,order)
+      console.log(1,books)
+  //    console.log(2,order)
 
-    return (
-      <ScrollView style={globalStyles.container}>
+      return (
+        <ScrollView style={globalStyles.container}>
 
-        <View style={{ paddingBottom: 32 }}>
-        {header_var}
-          <View style={{ gap: 12 }}>
-            {!order?'':books.filter(
-            (book) => {
-              if(order.books.includes(book._id)){
-                return 1;
-              }
-            }).map((book) => {
-              return (
-                <>
-                  <View key={book._id} style={globalStyles.viewFlex}>
+          <View style={{ paddingBottom: 32 }}>
+          {header_var}
+            <View style={{ gap: 12 }}>
+              {!order?'':books.filter(
+              (book) => {
+                if(order.books.includes(book._id)){
+                  return 1;
+                }
+              }).map((book) => {
+                return (
+                  <View key={'order' + book._id} style={globalStyles.viewFlex}>
                     <Link style={globalStyles.linkOrdered80}
-                      href={`movies/${book._id}`}
+                      href={`books/${book._id}`}
                       asChild
                     >
                       <Text>
@@ -94,13 +96,12 @@ if(books==null){
                       <Text style={globalStyles.button20}>Remove</Text>
                     </Pressable>
                   </View>
-                </>
-              );
-            })}
+                );
+              })}
+            </View>
           </View>
-        </View>
-      </ScrollView>
-    );
+        </ScrollView>
+      );
+    }
   }
-}
 }

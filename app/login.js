@@ -25,6 +25,7 @@ export default function Login() {
         globalStyles.container,
         { gap: 12, alignItems: "center", justifyContent: "center" },
       ]}
+     
     >
       {user?
          (

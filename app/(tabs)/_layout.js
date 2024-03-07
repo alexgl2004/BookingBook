@@ -39,7 +39,7 @@ export default function MainTabs() {
         }}
       />
       <Tabs.Screen
-        name="movies"
+        name="books"
         options={{
           title: "By Name",
           headerShown: false,

@@ -17,45 +17,50 @@ export default function MoviePage() {
   const { user } = useContext(UserContext);
   const { order, changeOrderState } = useContext(OrderContext);
   const header_var = (<Text style={globalStyles.h1}>Select a book</Text>)
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const options = {
+        method: 'GET',
+      }; 
+      const response = await fetch('https://prj-backend-mini-library.onrender.com/books/', options);
+      const jsonData = await response.json();
+      setBooks(jsonData);
+ //     changeOrderState(false);
+    }
+    fetchData();
+  }, [order]);
+
+
   if(user==null){
+
     return (
       <ScrollView style={globalStyles.container}>
           {header_var}
           <LoginText />
       </ScrollView>
     )
+
   }else{
     
-    if(books==null || (order!=null && order.updated)){
+//    if(books==null || (order!=null && order.updated)){
 
-//      useEffect(() => {
-        const fetchData = async () => {
-          const options = {
-            method: 'GET',
-          }; 
-          const response = await fetch('https://prj-backend-mini-library.onrender.com/books/', options);
-          const jsonData = await response.json();
-          setBooks(jsonData);
-          changeOrderState(false);
-        }
-        fetchData();
-//      }, [order]);
 
-    }
+//    }
 
     //console.log(books)
     //console.log(1)
 
     return (
       <ScrollView style={globalStyles.container}>
-        <View style={{ paddingBottom: 32 }}>
+        <View >
           {header_var}
           <View style={{ gap: 12 }}>
             {books?books.map((book) => {
               return (
                 <Link
-                  key={book._id}
-                  href={`movies/${book._id}`}
+                  key={'book' + book._id}
+                  href={`books/${book._id}`}
                   style={order && order.books.includes(book.id)?[globalStyles.linkOrdered]:[globalStyles.link]}
                   asChild
                 >
@@ -71,29 +76,29 @@ export default function MoviePage() {
                     <Text style={order && order.books.includes(book._id)?[globalStyles.link]:[globalStyles.linkOrdered]}>
                       {book.title}
                     </Text>
-                    <Text style={{
+                    <View style={{
                         color: "#777",
                         paddingBottom: 3,
                       }}>
-                        <Text>
-                          ISBN: <Text style={{
+                        <Text style={{
                             color: "#aaa",
                             paddingBottom: 3,
-                          }}>{book.isbn}</Text>
+                          }}>
+                          ISBN: {book.isbn}
                         </Text>
-                        <Text>
-                          &nbsp;&nbsp;&nbsp;Year: <Text style={{
+                        <Text style={{
                             color: "#aaa",
                             paddingBottom: 3,
-                          }}>{book.year}</Text>
+                          }}>
+                          &nbsp;&nbsp;&nbsp;Year: {book.year}
                         </Text>
-                        <Text>
-                          &nbsp;&nbsp;&nbsp;In stock: <Text style={{
+                        <Text style={{
                             color: "#aaa",
                             paddingBottom: 3,
-                          }}>{book.stock}</Text>
+                          }}>
+                          &nbsp;&nbsp;&nbsp;In stock: {book.stock}
                         </Text>
-                    </Text>
+                    </View>
                   </Pressable>
                 </Link>
               );

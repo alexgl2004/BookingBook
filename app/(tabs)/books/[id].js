@@ -8,7 +8,7 @@ import { COLORS, FONTS } from "../../../styles/constants";
 import { Link } from "expo-router";
 import { LoginText } from "../../../components/LoginText";
 //import { useNavigation } from "expo-router";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { UserContext } from "../../../context/UserContext";
 import { OrderContext } from "../../../context/OrderContext";
 
@@ -17,21 +17,24 @@ export default function MovieDetailPage() {
   const [book, setBook] = useState(null);
   const { user } = useContext(UserContext);
   const { deleteFromOrder, addToOrder, order  } = useContext(OrderContext);
-  console.log(order)
+ // console.log(order)
   const { id } = useLocalSearchParams();
 //  const navigation = useNavigation();
-
-if(book==null){
+useEffect(() => {
   const options = {
     method: 'GET',
   }; 
-  const response = fetch('https://prj-backend-mini-library.onrender.com/book/'+id, options)
+  fetch('https://prj-backend-mini-library.onrender.com/book/'+id, options)
   .then(response => response.json())
   .then(data => { 
-    console.log(1,data)
+ //   console.log(1,data)
     setBook(data);
   })
   .catch(error => console.error(error));
+}, [order]);
+
+if(book==null){
+
 } 
 //console.log(books)
   //console.log(books);

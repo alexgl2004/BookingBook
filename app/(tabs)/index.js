@@ -27,22 +27,20 @@ export default function HomePage() {
       <ScrollView style={globalStyles.container}>
         {header_var}
 
-            <Typography style={{ color: "green" }}>
+            <Typography style={{ color: "#aaa", fontSize: 27, marginBottom: 40 }}>
               {/* {user ? user.name : "Not logged in"} */}
               Welcome, {user.name}
             </Typography>
-            <Typography>
-              Make your choise
-            </Typography>
-            <Link asChild style={globalStyles.link} href="movies">
+           
+            <Link asChild style={globalStyles.link} href="books">
                 
                 <Pressable style={globalStyles.buttonNotOrder} 
                   onPress={() => {
-                      router.push('movies')
+                      //router.push('books')
       //              console.log(order)
                   }}
                 >
-                  <Text style={globalStyles.buttonNotOrderText}>SELECT Book</Text>
+                  <Text style={globalStyles.buttonNotOrderText}>Show list of books</Text>
               </Pressable>
             </Link>
       </ScrollView>

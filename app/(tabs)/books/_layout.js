@@ -24,7 +24,7 @@ export default function MoviesStack() {
           },
         }}
       >
-        <Stack.Screen name="index" options={{ title: "Movies" }} />
+        <Stack.Screen name="index" options={{ title: "Books" }} />
         <Stack.Screen name="[id]" options={{ title: "Details" }} />
       </Stack>
   );
